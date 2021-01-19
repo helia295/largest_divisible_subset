@@ -100,10 +100,33 @@ vector<int> largest_divisible_pairs(vector<int> input) {
 }
 
 
+void checkConditions(vector<int> input) {
+	
+	//to check if there is any NEGATIVE argument, throw exception
+	for (unsigned int i = 0; i < input.size(); i++) {
+		
+		if (input.at(i) < 0) {
+			
+			throw invalid_argument("Negative arguments not allowed!!!");
+		}
+	}
+	
+	//to check if there is any DUPLICATE argument, throw exception
+	for (unsigned int i = 0; i < input.size(); i++) {
+		for (unsigned int j = i + 1; j < input.size(); j++) {
+			if (input.at(i) == input.at(j)) {
+				throw invalid_argument("Duplicate arguments not allowed: " + to_string(input.at(i)));
+			}
+		}
+	}
+}
+
+
 int main() {
 	
 	//vector<int> digitsVector{2, 7, 8, 14, 22, 24, 28, 44, 56};
-	vector<int> digitsVector{2, 1, 4, 5, 6};
+	vector<int> digitsVector{2, 1, 4, 5, 6, 4};
+	checkConditions(digitsVector);
 	
 	vector<int> LDPvec = largest_divisible_pairs(digitsVector);
 	
