@@ -89,12 +89,35 @@ void  FindLDPsubset(vector<int> input, vector<int>& result, vector<int> currSubs
 }
 
 
+void checkConditions(vector<int> input) {
+	
+	//to check if there is any NEGATIVE argument, throw exception
+	for (unsigned int i = 0; i < input.size(); i++) {
+		
+		if (input.at(i) < 0) {
+			
+			throw invalid_argument("Negative arguments not allowed!!!");
+		}
+	}
+	
+	//to check if there is any DUPLICATE argument, throw exception
+	for (unsigned int i = 0; i < input.size(); i++) {
+		for (unsigned int j = i + 1; j < input.size(); j++) {
+			if (input.at(i) == input.at(j)) {
+				throw invalid_argument("Duplicate arguments not allowed: " + to_string(input.at(i)));
+			}
+		}
+	}
+}
+
+
 vector<int> largest_divisible_pairs(vector<int> digitsVector) {
 	
 	/* We sort the vector in increasing order so that we only have to check 
 	 * if the curr element is divisible by the previous one instead of both 
 	 * cases. */
-	sort( digitsVector.begin() , digitsVector.end() ); 	
+	sort( digitsVector.begin() , digitsVector.end() );
+	checkConditions(digitsVector); 	
 	
 	vector<int> sizeSubset(digitsVector.size(), -1);
 	vector<int> result;
@@ -108,7 +131,7 @@ vector<int> largest_divisible_pairs(vector<int> digitsVector) {
 
 int main() {
 	
-	vector<int> digitsVector{2, 7, 8, 14, 22, 24, 28, 44, 56};
+	vector<int> digitsVector{2, 3, 8, 14, 22, 24, 28, 44, 56};
 	//vector<int> digitsVector{22, 1, 44, 52, 6, 39, 14, 28, 88};
 	
 	vector<int> LDPvec = largest_divisible_pairs(digitsVector);
