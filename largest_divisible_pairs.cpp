@@ -17,6 +17,7 @@
 #include <vector>
 #include <algorithm>    // sort
 #include <stdexcept>
+#include <string>
 
 
 using namespace std;
